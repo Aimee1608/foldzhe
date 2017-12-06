@@ -1,0 +1,222 @@
+<html>
+
+<head>
+
+</head>
+<style>
+    .layui-form-switch {
+        padding-left: 0px;
+        transition: .1s linear;
+    }
+    #parent >li> span{background: #999999;display: block;width: 200px;border:1px solid #ECEEF2;}
+            li {line-height: 40px;display: block;position: relative;}
+            li  p{
+                    display: inline-block;
+                    width: 0px;
+                    height: 0px;
+                    border-left: 5px solid transparent;
+                    border-right: 5px solid transparent;
+                    border-top: 5px solid#2f2f2f;
+                      }
+             li>ul{display: none;}
+             li>ul>li{border: 1px solid #DEDEDE;width: 199px;}
+             #parent li i.zheicon.show+ul{display: block;}
+             #parent li i.zheicon.show >p{
+                     display: inline-block;
+                    width: 0px;
+                    height: 0px;
+                    border-top: 5px solid transparent;
+                    border-bottom: 5px solid transparent;
+                    border-left: 5px solid#2f2f2f;
+              }
+  #parent >li>div{
+    width:100%;
+    box-sizing: border-box;
+    padding-left:20px;
+  }
+    #parent >li .zheicon{
+      display: inline-block;
+      width: 0px;
+      height: 0px;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid#2f2f2f;
+      position: absolute;
+      left:2px;
+      top:10px;
+    }
+    #parent >li>div span{
+      width:18%;
+      display:inline-block;
+      height:30px;
+    }
+          .show{
+            display: block;
+          }
+</style>
+<body>
+<div class="main-wrap">
+    <blockquote class="layui-elem-quote fhui-admin-main_hd">
+        <h2>文章 【{$artId}】 评论列表</h2>
+    </blockquote>
+    <div class="y-role">
+        <!--工具栏-->
+        <div id="floatHead" class="toolbar-wrap">
+            <div class="toolbar">
+                <div class="box-wrap">
+                    <a class="menu-btn"></a>
+                    <div class="l-list">
+                        <!-- <a class="layui-btn layui-btn-small do-action" data-type="doAdd" data-href="{:url('add_cate')}"><i class="fa fa-plus"></i>新增</a> -->
+
+                        <a class="layui-btn layui-btn-small do-action" data-type="doRefresh" data-href=""><i class="fa fa-refresh fa-spin"></i>刷新</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/工具栏-->
+        <!--文字列表-->
+        <div class="fhui-admin-table-container">
+            <form action="/_Admin/Nav_list" class="form-horizontal" id="formrec" method="post" role="form">
+              <ul id="parent">
+                <li>
+                    <div>
+                      <span>ID</span>
+                      <span>评论人</span>
+                      <span>评论内容</span>
+                      <span>评论时间</span>
+                      <span>操作</span>
+                    </div>
+                </li>
+                <li>
+                    <i class="zheicon"></i>
+                    <div>
+                      <span>ID</span>
+                      <span>评论人</span>
+                      <span>评论内容</span>
+                      <span>评论时间</span>
+                      <span>操作</span>
+                    </div>
+                    <ul>
+                      <li>
+                          <span><p></p>列表</span>
+                          <div>
+                            <span>ID</span>
+                            <span>评论人</span>
+                            <span>评论内容</span>
+                            <span>评论时间</span>
+                            <span>操作</span>
+                          </div>
+                      </li>
+                    </ul>
+                </li>
+            </ul>
+                <table class="layui-table" lay-skin="line">
+                    <!-- <colgroup>
+                        <col width="5%">
+                        <col width="15%">
+                        <col width="8%">
+                        <col width="5%">
+                        <col width="15%">
+                    </colgroup> -->
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>评论人</th>
+                        <th>评论内容</th>
+                        <th>评论时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="zheBox">
+                          <td><div class="zhedie">展开</div>111</td>
+                          <td>222</td>
+                          <td>222</td>
+                          <td>33</td>
+                          <td>
+                              <a class="layui-btn layui-btn-small do-action" data-type="doDelOne" data-href="{:url('del_comment')}" data-id="0"><i class="icon-edit  fa fa-pencil-square-o"></i>删除</a>
+                          </td>
+                          <table class="layui-table" lay-skin="line">
+                              <!-- <colgroup>
+                                  <col width="5%">
+                                  <col width="15%">
+                                  <col width="8%">
+                                  <col width="5%">
+                                  <col width="15%">
+                              </colgroup> -->
+
+
+                                <tr class="zheBox">
+                                    <td><div class="zhedie">展开</div>111</td>
+                                    <td>222</td>
+                                    <td>222</td>
+                                    <td>33</td>
+                                    <td>
+                                        <a class="layui-btn layui-btn-small do-action" data-type="doDelOne" data-href="{:url('del_comment')}" data-id="0"><i class="icon-edit  fa fa-pencil-square-o"></i>删除</a>
+                                    </td>
+
+                                </tr>
+
+
+                          </table>
+                      </tr>
+
+                    </tbody>
+                </table>
+            </form>
+        </div>
+
+    </div>
+</div>
+</body>
+<script>
+
+    layui.use(['layer','common'], function () {
+        var $ = layui.jquery
+                , layer = layui.layer;
+
+        $(document).on('click','.change_status', function () {
+            var id=$(this).attr('data-id');
+
+            var obs=$(this);
+            $.ajax({
+                url: '{:url("cate_state")}',
+                dataType: "json",
+                data:{'id':id},
+                type: "POST",
+                success: function(data){
+                    if(data.code == 1){
+                        obs.find('div').removeClass('layui-form-onswitch');
+                        layer.msg(data.msg,{icon:2,time:1500,shade: 0.1,});
+                    }else{
+                        obs.find('div').addClass('layui-form-onswitch');
+                        layer.msg(data.msg,{icon:2,time:1500,shade: 0.1,});
+                    }
+                },
+                error:function(ajaxobj)
+                {
+                    if(ajaxobj.responseText!='')
+                        alert(ajaxobj.responseText);
+                }
+            });
+
+        });
+        $('#parent').on('click','.zheicon',function(){
+          if($(this).hasClass('show')){
+            $(this).removeClass('show');
+          }else{
+              $(this).addClass('show');
+          }
+        });
+
+        $('.zheBox').on('click',function(){
+          console.log($(this).next());
+          if(!$(this).next('tr').css('display')=='none'){
+            $(this).next('tr').hide();
+          }else{
+              $(this).next('tr').show();
+          }
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,shrink-to-fit=no">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="msapplication-tap-highlight" content="no">
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div class="main-wrap">
+    <div class="y-role">
+        <!--文字列表-->
+        <div class="fhui-admin-table-container">
+            <form  class="form-horizontal" id="formrec" method="post" role="form">
+                <ul class="messageBox">
+                    <li class="msg-head">
+                        <div class="">
+                            <span>ID</span>
+                            <span>评论人</span>
+                            <span>评论内容</span>
+                            <span>评论时间</span>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script>
+    $(function(){
+        var array = [
+            {id:1,name:'张一',time:'2017-12-06',data:[
+                {id:2,name:'张二',time:'2017-12-06',
+                    data:[
+                        {id:22,name:'张三',time:'2017-12-06'},{id:23,name:'张四',time:'2017-12-06'}
+                    ]
+                },
+                {id:3,name:'张五',time:'2017-12-06'}
+            ]},
+            {id:4,name:'张刘曼',time:'2017-12-06',data:[
+                {id:5,name:'张六',time:'2017-12-06'},{id:6,name:'张七',time:'2017-12-06'}
+            ]},
+            {id:7,name:'张吧',time:'2017-12-06',data:[
+                {id:8,name:'张就',time:'2017-12-06'},{id:9,name:'张是',time:'2017-12-06'}
+            ]},
+            {id:10,name:'张三一',time:'2017-12-06',data:[
+                {id:11,name:'张三二',time:'2017-12-06'},{id:12,name:'张三撒',time:'2017-12-06'}
+            ]},
+            {id:13,name:'张三四',time:'2017-12-06',data:[
+                {id:14,name:'张三五',time:'2017-12-06'},{id:15,name:'张三六',time:'2017-12-06'}
+            ]},
+            {id:16,name:'张三七',time:'2017-12-06'},
+            {id:17,name:'张三吧',time:'2017-12-06'},
+            {id:18,name:'张三就',time:'2017-12-06'}
+        ];
+        var html = '',sw = 1;
+        listShow(array);
+        $('.messageBox').append(html);
+        function listShow(array){
+            for(var i = 0;i<array.length; i++){
+                if(array[i].data){
+                    html+=`<li>
+                    <div>
+                    <span><i class="zheicon comicon"></i>${array[i].id}</span>
+                    <span>${array[i].name}</span>
+                    <span>好漂亮</span>
+                    <span>${array[i].time}</span>
+                    </div><ul>`;
+                    listShow(array[i].data);
+                    html+='</ul></li>';
+                }else{
+                    html+=`<li>
+                   <div>
+                       <span>${array[i].id}</span>
+                       <span>${array[i].name}</span>
+                       <span>好漂亮</span>
+                        <span>${array[i].time}</span>
+                        </div></li>`;
+                }
+            }
+        }
+        $('.messageBox').on('click','.zheicon',function(){
+            var zheBox = $(this).parent().parent().siblings('ul');
+            if($(zheBox).hasClass('show')){
+                $(zheBox).removeClass('show');
+            }else{
+                $(zheBox).addClass('show');
+            }
+        });
+
+    })
+</script>
+</body>
+</html>
